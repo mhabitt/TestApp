@@ -1,0 +1,41 @@
+import React from 'react'
+import {NavLink, Outlet, useNavigate} from 'react-router-dom'
+import {Nav, NavItem} from "react-bootstrap";
+import {useSelector} from "react-redux";
+import {selectUser} from "../services/reducers/users/selectors";
+import {useAuth} from "../services/auth";
+
+export const Layout = () => {
+    const user = useSelector(selectUser);
+    const auth = useAuth();
+    const navigate = useNavigate();
+    const logoutUser = async () => {
+        await auth.logout();
+        navigate("/login")
+    }
+
+    return (
+        <div className='app'>
+            <div className="sidebar">
+                <Nav>
+                    <NavItem>
+                        <NavLink to="/" end>Home</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to="fake_api">Api</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to="youtube">Youtube</NavLink>
+                    </NavItem>
+
+                </Nav>
+                <div className={"nav-footer"} onClick={() => logoutUser()}>
+                    Zalogowany jako {user.name}
+                </div>
+            </div>
+            <div className='content'>
+                <Outlet/>
+            </div>
+        </div>
+    )
+}

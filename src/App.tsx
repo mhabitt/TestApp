@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect} from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import './App.css';
+import {Layout} from './components/Layout';
+import FakeApiPage from './pages/FakeApi/FakeApiPage';
+import HomePage from './pages/Home/HomePage';
+import YoutubePage from './pages/Youtube/YoutubePage';
+import {useAuth} from "./services/auth";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const auth = useAuth()
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!auth.isAuthenticated()){
+            navigate("/login", {replace: true})
+        }
+    }, []);
+
+
+    return (
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<HomePage/>}/>
+                <Route path="/fake_api" element={<FakeApiPage/>}/>
+                <Route path="/youtube" element={<YoutubePage/>}/>
+                <Route path="*" element={<>Not found</>}/>
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;

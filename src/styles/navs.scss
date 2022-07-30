@@ -1,0 +1,33 @@
+.sidebar{
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: $navbar-light-color;
+  .nav{
+    flex-direction: column;
+    flex: 1;
+    .nav-item{
+      cursor: pointer;
+      padding: 4px 8px;
+      display: flex;
+      a{
+        text-decoration: none;
+        color: $white;
+        padding: 4px;
+        border-radius: 4px;
+        flex: 1;
+        &:hover{
+          background: $navbar-light-color;
+        }
+      }
+      a.active{
+        background: $navbar-light-active-color;
+      }
+
+    }
+  }
+  .nav-footer{
+    padding: 4px 8px;
+    color: $white;
+  }
+}

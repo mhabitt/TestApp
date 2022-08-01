@@ -6,6 +6,7 @@ import FakeApiPage from './pages/FakeApi/FakeApiPage';
 import HomePage from './pages/Home/HomePage';
 import YoutubePage from './pages/Youtube/YoutubePage';
 import {useAuth} from "./services/auth";
+import FakeApiPostsPage from "./pages/FakeApi/pages/Posts/FakeApiPostsPage";
 
 function App() {
     const auth = useAuth()
@@ -22,8 +23,10 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout/>}>
                 <Route index element={<HomePage/>}/>
-                <Route path="/fake_api" element={<FakeApiPage/>}/>
-                <Route path="/youtube" element={<YoutubePage/>}/>
+                <Route path="fake_api" element={<FakeApiPage/>}>
+                    <Route path="posts" element={<FakeApiPostsPage/>}/>
+                </Route>
+                <Route path="youtube" element={<YoutubePage/>}/>
                 <Route path="*" element={<>Not found</>}/>
             </Route>
         </Routes>

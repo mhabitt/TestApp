@@ -4,6 +4,7 @@ import {LoginFormApi} from "../types/types";
 import {Button, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../../services/auth";
+import {handleResponse} from "../../../services/api/handleResponse";
 
 
 const LoginForm = () => {
@@ -11,12 +12,11 @@ const LoginForm = () => {
     const navigate = useNavigate();
     const auth = useAuth();
     const onSubmit = async (data: LoginFormApi) => {
-        console.log(data);
         try{
-            const res = await auth.login(data);
+            await auth.login(data);
             navigate("/")
         }catch (e){
-            console.log(e);
+            await handleResponse(e);
         }
 
     }

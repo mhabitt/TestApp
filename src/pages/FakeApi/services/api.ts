@@ -3,23 +3,23 @@ import {PostApi} from "./types";
 
 export default class FakeApiService{
     static async getPosts(): Promise<PostApi[]>{
-        return await Api.get("posts")
+        return Api.get("posts")
     }
 
     static async createPost(data: PostApi): Promise<PostApi>{
-        return await Api.post("posts", data)
+        return Api.post("posts", data)
     }
 
     static async updatePost(data: PostApi): Promise<PostApi>{
-        return await Api.put(`posts/${data.id}`, data)
+        return Api.put(`posts/${data.id}`, data)
     }
 
     static async getPost(id: number): Promise<PostApi>{
-        return await Api.get(`posts/${id}`)
+        return Api.get(`posts/${id}`)
     }
 
     static async remove(id: number): Promise<PostApi>{
-        return await Api.remove(`posts/${id}`)
+        return Api.remove(`posts/${id}`)
     }
 }
 

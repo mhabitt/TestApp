@@ -37,7 +37,7 @@ const FakeApiPostsPage = () => {
 
     const removePost = async () => {
         try{
-            const res = await FakeApiService.remove(1)
+            const res = await FakeApiService.removePost(1)
         }catch (e) {
             handleResponse(e)
         }

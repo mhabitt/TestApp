@@ -1,5 +1,5 @@
 import Api from "../../../services/api/api";
-import {PostApi} from "./types";
+import {PostApi, UserApi} from "./types";
 
 export default class FakeApiService{
     static async getPosts(): Promise<PostApi[]>{
@@ -18,8 +18,29 @@ export default class FakeApiService{
         return Api.get(`posts/${id}`)
     }
 
-    static async remove(id: number): Promise<PostApi>{
+    static async removePost(id: number): Promise<PostApi>{
         return Api.remove(`posts/${id}`)
     }
+
+    static async getUsers(): Promise<UserApi[]>{
+        return Api.get("users")
+    }
+
+    static async createUser(data: UserApi): Promise<UserApi>{
+        return Api.post("users", data)
+    }
+
+    static async updateUser(data: UserApi): Promise<UserApi>{
+        return Api.put(`users/${data.id}`, data)
+    }
+
+    static async getUser(id: number): Promise<UserApi>{
+        return Api.get(`users/${id}`)
+    }
+
+    static async removeUser(id: number): Promise<UserApi>{
+        return Api.remove(`users/${id}`)
+    }
+    
 }
 

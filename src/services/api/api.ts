@@ -1,5 +1,6 @@
 import accessTokenService from "../accessTokenService";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../auth";
 
 const apiUrl = `${process.env.REACT_APP_API_URL}`;
 
@@ -11,6 +12,7 @@ const defaultHeaders = (): Record<string, string> => {
 }
 
 class Api {
+
     static async post<T>(url: string, data: unknown): Promise<never | T> {
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "POST",

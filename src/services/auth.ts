@@ -4,11 +4,13 @@ import {LoggedUserApi} from "./reducers/users/types";
 import {authUser, logoutUser} from "./reducers/users/actions";
 import {mockUnprocessableEntity} from "./api/mock";
 import accessTokenService from "./accessTokenService";
+import {useState} from "react";
 
 export const useAuth = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const dispatch = useDispatch();
     const tokenPrefix = process.env.REACT_APP_TOKEN;
-    const localStorage = window.localStorage
+    const localStorage = window.localStorage;
     const login = async (data: LoginFormApi) => {
         if (!data.login) {
             return Promise.reject(mockUnprocessableEntity([{
@@ -21,6 +23,7 @@ export const useAuth = () => {
             name: data.login,
             role: data.login === "admin" ? "ADMIN" : "USER"
         }
+        setIsAuthenticated(true);
         dispatch(authUser(user));
         accessTokenService.update()
     }
@@ -38,5 +41,5 @@ export const useAuth = () => {
         return true;
     }
 
-    return {login, logout, checkLogin, getToken}
+    return {login, logout, checkLogin, getToken, isAuthenticated}
 }

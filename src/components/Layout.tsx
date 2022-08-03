@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {NavLink, Outlet, useNavigate} from 'react-router-dom'
 import {Nav, NavItem} from "react-bootstrap";
 import {useSelector} from "react-redux";
@@ -14,8 +14,14 @@ export const Layout = () => {
         navigate("/login")
     }
 
+    useEffect(() => {
+        if (!auth.checkLogin()) {
+            navigate("/login", {replace: true})
+        }
+    }, []);
+
     return (
-        <div className='app'>
+        <>
             <div className="sidebar">
                 <Nav>
                     <NavItem>
@@ -36,6 +42,6 @@ export const Layout = () => {
             <div className='content'>
                 <Outlet/>
             </div>
-        </div>
+        </>
     )
 }

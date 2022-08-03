@@ -1,5 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
-import {selectUser} from "./reducers/users/selectors";
+import {useDispatch} from "react-redux";
 import {LoginFormApi} from "../pages/Security/types/types";
 import {LoggedUserApi} from "./reducers/users/types";
 import {authUser, logoutUser} from "./reducers/users/actions";
@@ -7,7 +6,6 @@ import {mockUnprocessableEntity} from "./api/mock";
 import accessTokenService from "./accessTokenService";
 
 export const useAuth = () => {
-    const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const tokenPrefix = process.env.REACT_APP_TOKEN;
     const localStorage = window.localStorage

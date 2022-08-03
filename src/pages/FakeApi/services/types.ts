@@ -8,7 +8,7 @@ export interface PostApi{
 export interface UserApi{
     id: number;
     name: string;
-    userName: string;
+    username: string;
     email: string;
     address: AddressApi;
     phone: string;

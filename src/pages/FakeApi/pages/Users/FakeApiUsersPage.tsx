@@ -3,6 +3,7 @@ import {UserApi} from "../../services/types";
 import FakeApiService from "../../services/api";
 import {handleResponse} from "../../../../services/api/handleResponse";
 import {Button, Form, Spinner} from "react-bootstrap";
+import FakeApiUsersList from "./components/FakeApiUsersList";
 
 const FakeApiUsersPage = () => {
     const [data, setData] = useState<UserApi[] | undefined>(undefined);
@@ -21,7 +22,7 @@ const FakeApiUsersPage = () => {
 
     const saveUser = async () => {
         try{
-            const res = await FakeApiService.createUser({} as UserApi)
+            const res = await FakeApiService.createUser({name: "Test"} as UserApi)
         }catch (e) {
             handleResponse(e)
         }
@@ -44,17 +45,13 @@ const FakeApiUsersPage = () => {
     }
 
     if(!data){
-        return <Spinner animation={"border"}/>
+        return <Spinner role={"loader"} animation={"border"}/>
     }
     return <Form.Group>
         <Button variant={"primary"} onClick={saveUser}>Dodaj</Button>
         <Button variant={"primary"} onClick={updateUser}>Zapisz</Button>
         <Button variant={"primary"} onClick={removeUser}>Usuń</Button>
-        {
-            data?.map((value, index) => <li key={value.id}>
-                {value.name}
-            </li>)
-        }
+        <FakeApiUsersList users={data}/>
     </Form.Group>
 }
 export default FakeApiUsersPage

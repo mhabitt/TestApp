@@ -1,6 +1,5 @@
-import {PostApi} from "../../pages/FakeApi/services/types";
-import {useAuth} from "../auth";
 import accessTokenService from "../accessTokenService";
+import {useNavigate} from "react-router-dom";
 
 const apiUrl = `${process.env.REACT_APP_API_URL}`;
 
@@ -12,16 +11,7 @@ const defaultHeaders = (): Record<string, string> => {
 }
 
 class Api {
-
-    static isAuthenticated = () => {
-        if (!accessTokenService.get()) {
-            window.location.replace("/login");
-            return;
-        }
-    }
-
     static async post<T>(url: string, data: unknown): Promise<never | T> {
-        this.isAuthenticated();
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "POST",
             headers: defaultHeaders(),
@@ -34,7 +24,6 @@ class Api {
     }
 
     static async get<T>(url: string): Promise<never | T> {
-        this.isAuthenticated();
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "GET",
             headers: defaultHeaders()
@@ -46,7 +35,6 @@ class Api {
     }
 
     static async put<T>(url: string, data: unknown): Promise<never | T> {
-        this.isAuthenticated();
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "PUT",
             headers: defaultHeaders(),
@@ -59,7 +47,6 @@ class Api {
     }
 
     static async remove<T>(url: string): Promise<never | T> {
-        this.isAuthenticated();
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "DELETE",
             headers: defaultHeaders()
@@ -71,7 +58,6 @@ class Api {
     }
 
     static async patch<T>(url: string, data: unknown): Promise<never | T> {
-        this.isAuthenticated();
         const res = await fetch(`${apiUrl}/${url}`, {
             method: "PATCH",
             headers: defaultHeaders(),

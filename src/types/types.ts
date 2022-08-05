@@ -34,3 +34,16 @@ export interface CompanyApi{
     catchPhrase: string;
     bs: string;
 }
+
+export interface TodoApi{
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
+export interface AlbumApi{
+    userId: number;
+    id: number;
+    title: string;
+}

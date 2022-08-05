@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form";
 import {LoginFormApi} from "../types/types";
 import {Button, Form} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "../../../services/auth";
+import {useAuth} from "../../../services/useAuth";
 import {handleResponse} from "../../../services/api/handleResponse";
 
 

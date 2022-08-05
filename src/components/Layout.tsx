@@ -3,7 +3,7 @@ import {NavLink, Outlet, useNavigate} from 'react-router-dom'
 import {Nav, NavItem} from "react-bootstrap";
 import {useSelector} from "react-redux";
 import {selectUser} from "../services/reducers/users/selectors";
-import {useAuth} from "../services/auth";
+import {useAuth} from "../services/useAuth";
 
 export const Layout = () => {
     const user = useSelector(selectUser);
@@ -18,7 +18,7 @@ export const Layout = () => {
         if (!auth.checkLogin()) {
             navigate("/login", {replace: true})
         }
-    }, []);
+    }, [auth, navigate]);
 
     return (
         <>

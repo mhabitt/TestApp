@@ -1,4 +1,4 @@
-import {UserApi} from "../../../services/types";
+import {UserApi} from "../../../../../types/types";
 import React from "react";
 import FakeApiUsersListItem from "./FakeApiUsersListItem";
 

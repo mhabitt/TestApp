@@ -18,13 +18,17 @@ code {
 
 .app{
   display: flex;
-  min-height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 
 .content{
   flex-grow: 1;
   display: flex;
   padding: 15px;
+  overflow: auto;
 }
 
 @media only screen and (max-width: 992px){

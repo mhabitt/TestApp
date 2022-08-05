@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
-import {Routes, Route, useNavigate, BrowserRouter} from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import {Layout} from './components/Layout';
 import FakeApiPage from './pages/FakeApi/FakeApiPage';
 import HomePage from './pages/Home/HomePage';
 import YoutubePage from './pages/Youtube/YoutubePage';
-import {useAuth} from "./services/auth";
 import FakeApiPostsPage from "./pages/FakeApi/pages/Posts/FakeApiPostsPage";
 import FakeApiUsersPage from "./pages/FakeApi/pages/Users/FakeApiUsersPage";
 import LoginPage from "./pages/Security/LoginPage";

@@ -1,8 +1,10 @@
 import {
     BadRequestException,
-    ForbiddenException, NotAllowedException,
+    ForbiddenException,
+    NotAllowedException,
     NotFoundException,
-    UnauthorizedException, UnknownException,
+    UnauthorizedException,
+    UnknownException,
     UnprocessableEntity
 } from "./exceptions";
 

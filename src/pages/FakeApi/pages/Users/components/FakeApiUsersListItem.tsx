@@ -1,4 +1,4 @@
-import {UserApi} from "../../../services/types";
+import {UserApi} from "../../../../../types/types";
 
 interface Props{
     user: UserApi

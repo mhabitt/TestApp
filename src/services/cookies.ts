@@ -1,4 +1,5 @@
 import Cookies from "universal-cookie/lib";
+
 const cookies = new Cookies();
 
 export const setCookie = (name?: string, value?: string) => {

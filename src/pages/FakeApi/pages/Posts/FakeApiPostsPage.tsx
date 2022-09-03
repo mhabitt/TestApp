@@ -3,35 +3,22 @@ import {handleResponse} from "../../../../services/api/handleResponse";
 import {Button, Form, Spinner} from "react-bootstrap";
 import {PostApi} from "../../../../types/types";
 import Post from "./components/Post";
-import {usePostApi} from "../../hooks/usePostApi";
+import {usePostApi} from "../../hooks/post/usePostApi";
+import {usePostList} from "../../hooks/post/usePostList";
+import {useCreatePost} from "../../hooks/post/useCreatePost";
 
 const FakeApiPostsPage = () => {
-    const [data, setData] = useState<PostApi[]>([])
+    const {data, loading, setData} = usePostList();
     const postApi = usePostApi();
-
-    const fetchPosts = async () => {
-        try {
-            const resp = await postApi.getPosts();
-            setData(resp);
-        } catch (e) {
-            handleResponse(e)
-        }
-    }
-    useEffect(() => {
-        fetchPosts();
-    }, []);
-
-    if (!data) {
+    const {create, loading: createLoading, errors: createErrors} = useCreatePost();
+    if (loading) {
         return <Spinner animation={"border"}/>
     }
 
     const savePost = async () => {
-        try {
-            const res = await postApi.createPost({} as PostApi)
-            setData([...data, res])
-        } catch (e) {
-            handleResponse(e)
-        }
+        const res = await create({} as PostApi);
+        res && setData([res, ...data]);
+        console.log(createErrors);
     }
 
     const updatePost = async () => {
@@ -50,10 +37,7 @@ const FakeApiPostsPage = () => {
         }
     }
     return <Form.Group>
-        <Button variant={"primary"} onClick={savePost}>Dodaj</Button>
-        {
-            postApi.loading && <Spinner animation={"border"}/>
-        }
+        <Button variant={"primary"} onClick={savePost}>{createLoading && <Spinner role={"loader"} size={"sm"} animation={"border"}/>}Dodaj</Button>
         {
             data?.map((post, index) =>
                 <Post post={post} key={post.id}/>
